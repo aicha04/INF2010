@@ -82,7 +82,7 @@ public class Trieuse {
         Etudiant[] etudiants = {
             john, Caroline, Karl, Ahmed, Sam};
 
-         // Completer le pseudo-code pour trie les etudiants par nom -section 
+        
         System.out.println("Par le nom ");
         System.out.println("----------");
        	trierParNom(etudiants);  //on ordonne les étudiants selon leur section puis on les affiche

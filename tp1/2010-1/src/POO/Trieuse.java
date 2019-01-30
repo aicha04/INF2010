@@ -13,46 +13,42 @@ public class Trieuse {
 
     private static class NomOrdre implements Comparator<Etudiant> {
         public int compare(Etudiant x, Etudiant y) {
-          return (x.getNom().compareTo(y.getNom()));
+        	return (x.getNom().compareToIgnoreCase(y.getNom()));
         }
     }
 
 
     private static class SectionOrdre implements Comparator<Etudiant> {
         public int compare(Etudiant x, Etudiant y) {
-             if( x.getSection()<y.getSection())
-             {
+             if( x.getSection()<y.getSection()) {
             	 return -1;
              }
-             else if(x.getSection() < y.getSection())
-             {
-            	return 1; 
+             else if(x.getSection() < y.getSection()) {
+                 return 1; 
              }
-             else
-             {
+             else {
             	 return 0;
              }
         }
     }
 
                 
-          // Ajouter des méthodes  ParNom() et ParSection()
-    public static void trierParNom(Etudiant [] etudiants)
-    	{
+    // methode de tri  ParNom et ParSection
+    public static void trierParNom(Etudiant [] etudiants) {
     	Arrays.sort(etudiants, Par_nom);
-    	}
-    public static void trierParSection(Etudiant [] etudiants)
-	{
+    }
+    
+    public static void trierParSection(Etudiant [] etudiants) {
     	Arrays.sort(etudiants, Par_section);
 	}
-      public static  void afficher (Etudiant [] etudiants)
-      {
-    	  for(int i=0;i< etudiants.length; i++)
-          {
-          	System.out.println(etudiants[i].toString());
-          }
-            
-      }
+    
+    //methode d'affichage
+    public static  void afficher (Etudiant [] etudiants) {
+		for(int i=0;i< etudiants.length; i++) {
+		System.out.println(etudiants[i].toString());
+		}
+    
+    }
     
    
     public static void main(String[] args) {
@@ -73,14 +69,14 @@ public class Trieuse {
         Etudiant[] etudiants = {
             john, Caroline, Karl, Ahmed, Sam};
 
-         // Completer le pseudo-code pour trie les etudiants par nom -section 
+        // trier par nom et afficher le tableau d'etudiants
         System.out.println("Par le nom ");
         System.out.println("----------");
        	trierParNom(etudiants);
         afficher(etudiants);
         System.out.println("----------");
         
-        
+     // trier par section et afficher le tableau d'etudiants
         System.out.println("Par section");
         System.out.println("----------");    
         Arrays.sort(etudiants,Par_section);

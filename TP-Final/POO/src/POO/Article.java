@@ -43,7 +43,7 @@ package POO;
 	
 	public double getPrix(int count)
 	{
-		return Prix_net; //Pas compris
+		return Prix_net; 
 	}
 
 	//public abstract  double getVAT();

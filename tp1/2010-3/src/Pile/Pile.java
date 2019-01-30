@@ -1,8 +1,6 @@
 package Pile;
 
-import java.util.Iterator;
-
-public class Pile<T> implements Iterable <T>  {
+public class Pile <T> {
 	private int theSize_; 
 	private Node<T> topMarker_; 
 	private Node<T> endMarker_;
@@ -45,14 +43,32 @@ public class Pile<T> implements Iterable <T>  {
 	
 	public int size( ) { return theSize_; }
 	public boolean isEmpty( ) { return size() == 0; }
-
-	@Override
-	public Iterator<T> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	//la classe facilitant l'itération sur les éléments de la liste
+	private class LinkedListIterator implements java.util.Iterator<T> 
+	{
+		private Node <T> itemCourant=topMarker_.next_;
+		public boolean hasNext() //indique s'il existe un item après celui courant sur lequel pointe l'itérateur
+		{
+			return itemCourant !=endMarker_;
+		}
+		
+		public T next() //retourne l'element suivant  ou le noeud courant 
+		{
+			if(hasNext())
+			{
+				T suivant=itemCourant.item_;
+				itemCourant=itemCourant.next_;
+				return suivant;
+			}
+			else
+			{
+				throw new java.util.NoSuchElementException(); //si l'element n'a pas de suivant et donc est le dernier
+			}
+		}
 	}
 	
-	}
+}
 	
 	
 	

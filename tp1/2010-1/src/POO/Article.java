@@ -19,7 +19,7 @@ package POO;
   
 		
 	}
-	///Commentaires !!!
+	// Methode d'acces et de modification des atrributs
 	public String getNumProduit() {
 		return NumProduit;
 	}	
@@ -38,7 +38,7 @@ package POO;
 	}
 	public double getPrix(int count)
 	{
-		return Prix_net; //Pas compris
+		return Prix_net; 
 	}
 
 	//public abstract  double getVAT();

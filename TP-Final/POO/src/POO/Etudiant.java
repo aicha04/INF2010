@@ -14,13 +14,13 @@ public class Etudiant {
 	private NoteCours [] notes;
 	
 	//constructeurs
-	 public Etudiant(String Matr,String nom, int section) {
-             this.Matr=Matr;
-             this.nom=nom;
-             this.section=section;
-             notes=new NoteCours[N];
-             n_des_notes=0;
-	    }
+	public Etudiant(String Matr,String nom, int section) {
+        this.Matr=Matr;
+        this.nom=nom;
+        this.section=section;
+        notes=new NoteCours[N];
+        n_des_notes=0;
+    }
         
          
 	
@@ -38,8 +38,7 @@ public class Etudiant {
 	//calcul de la moyenne
 	public double NoteMoyenne(){
 		int somme=0;
-		for(int i=0;i<n_des_notes;i++)
-		{
+		for(int i=0;i<n_des_notes;i++) {
 			somme+=notes[i].note;
 		}
 		double moyenne = (double)somme/ (double) n_des_notes;
@@ -57,13 +56,13 @@ public class Etudiant {
 	}
 
 	//getter email
-      public String getEmail() {
-                   return this.email;
+    public String getEmail() {
+    	return this.email;
 	}
 
       //setter email
 	public void setEmail(String email) {
-                      this.email=email;
+		this.email=email;
 	}
 
 	//getter nom
@@ -79,7 +78,8 @@ public class Etudiant {
 	
 	//getter et setter prenom et section
 	public String getPrenom() {
-		return this.prenom;	}
+		return this.prenom;	
+	}
 
 	public void setPrenom(String prenom) {
 	this.prenom=prenom;

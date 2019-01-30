@@ -9,7 +9,7 @@ public class Compteur implements Comparable<Compteur> {
 
     
     public Compteur(String id) {
-         this.nom=id;
+        this.nom=id;
     } 
 
    
@@ -19,13 +19,13 @@ public class Compteur implements Comparable<Compteur> {
 
    
     public int score() {
-         // retourne le rseultat d'un esemble d'essais
+        // retourne le rseultat d'un esemble d'essais
     	return compteur;
     } 
 
    
     public String toString() {
-         return ("Le compteur "+ this.nom + " est � "+ this.compteur);
+        return ("Le compteur "+ this.nom + " est � "+ this.compteur);
     } 
   
     public int compareTo(Compteur x)  //compare deux compteurs
@@ -48,11 +48,12 @@ public class Compteur implements Comparable<Compteur> {
 	  
     private static Random random=new Random(10000);
     
-      //Retourne un nombre entier aléatoire uniformément dans [0,n[
-	 public static int uniform(int n) 
-	 {
-	          return (int)(Math.random()*n);
-	 }
+    //Retourne un nombre entier aléatoire uniformément dans [0,n[
+    public static int uniform(int n) 
+    {
+    	return (int)(Math.random()*n);
+    	
+    }
 	 
     public static void main(String[] args) 
     { 
