@@ -5,6 +5,22 @@ public class Sac1 <T> implements Iterable<T> {
 	private Noeud <T> debut; //noeud representant le premier element du sac
 	private Noeud <T> fin;  //noeud representant le dernier element du sac
 	 
+	
+	public Sac1()  //constructeur classe Sac1
+	{
+		taille=0;
+		debut =new Noeud<T> (null, null, null);
+		fin= new Noeud(null, debut, null);
+		debut.itemSuivant=fin;
+	}
+	   public T set(int position, T aAjouter)
+	   {
+	       Noeud  <T> ancienNoeud = getNode( position); //récupérer l'ancien noeud à la position donnée
+	        T ancienneValeur=ancienNoeud.item; //récupérer l'item à l'ancienne position
+	        ancienNoeud.item=aAjouter; //insérer le nouveau noeud
+	        return ancienneValeur; //retourner l'aciene valeur
+	   }
+
 	public int taille() //getter taile su sac
 	{
 		return taille;
