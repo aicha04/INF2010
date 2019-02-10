@@ -30,7 +30,16 @@ public class LinearSpacePerfectHashing<AnyType>
    {
       return n;
    }
-
+   public class Position<Anytype>
+   {
+	   Position()
+	   {
+		   value=0;
+		   found=false;
+	   }
+	   int value;
+	   boolean found;
+   }
    public void clear()
    {
       generator = new Random( System.nanoTime() );
@@ -70,6 +79,10 @@ public class LinearSpacePerfectHashing<AnyType>
 
       n    = array.size();
       data = new QuadraticSpacePerfectHashing[n];
+      for(int i=0;i<n;i++)
+      {
+    	  data[i]=new QuadraticSpacePerfectHashing();
+      }
       
       if(n == 1)
       {
@@ -78,21 +91,23 @@ public class LinearSpacePerfectHashing<AnyType>
       }
       else
       {
-    	  int[] position=new int[n];
+    	 Position<AnyType>[] position=new Position[n];
     	  for(int i=0;i<array.size();i++)
     	  {
-    		position[i]=findPos(array.get(i)); 
+    		  position[i]=new Position();
+    		position[i].value=findPos(array.get(i)); 
     	  }
-    	  for(int i=0;i<n;i++)
+    	  for(int i=0;i<n&& !(position[i].found);i++)
     	  {
     		  AnyType[] valeurs=(AnyType[])new Object[n];
     		 
     		  int nValeurs=0;
     		  for(int j=0;j<n;j++)
     		  {
-    			  if(position[i]==findPos(array.get(j)))
+    			  if(findPos(array.get(j))==position[i].value && !(position[i].found) )
     			  {
     				  valeurs[nValeurs]=array.get(j);
+    				  position[i].found=true;
     				  nValeurs++;
     			  }
     		  }
@@ -101,7 +116,8 @@ public class LinearSpacePerfectHashing<AnyType>
     		  {
     			  tabValeurs.add(valeurs[k]);
     		  }
-    		  data[position[i]].setArray(tabValeurs);
+    		  memorySize+=(nValeurs*nValeurs);
+    		  data[position[i].value].setArray(tabValeurs);
     	  }
     	  
       }
@@ -121,17 +137,6 @@ public class LinearSpacePerfectHashing<AnyType>
       
       return sb.toString();
    }
-   public boolean foundElement(AnyType[] array, AnyType x )
-   {
-	   boolean resultat=false;
-	   for(int i=0;i< array.length; i++)
-	   {
-		   if( array[i].equals(x))
-		   {
-			   resultat=true;
-		   }
-		 
-	   }
-     return resultat;
-   }
+  
+ 
 }
