@@ -40,24 +40,29 @@ public class LinearSpacePerfectHashing<AnyType>
 
    private int findPos(AnyType x)
    {
-       // calcul de la position
-	   int j= ((a*x.hashCode() + b)% p)% n;
-	   if (j>=0&&j<n)
-		   return j;
-	   else return -1;
+      // completer j = mod(mod(ax + b; p); n)
+       int position=(((a*x.hashCode()+b)%p)%n);
+       if(position>=0 && position<n)
+       {
+    	   return position;
+       }
+       else
+       {
+    	   return -1;
+       }
    }
    
    public boolean contains(AnyType x)
-   {      
-      // completer
-	   int j=findPos(x);
-	   return data[j].contains(x);
-       
+   {    
+	    int position=findPos(x);
+	    return (data[position].contains(x));
    }
       
    @SuppressWarnings("unchecked")
    private void allocateMemory(ArrayList<AnyType> array)
    {
+	   a=generator.nextInt(p); 
+  		b=generator.nextInt(p);
       clear();
       
       if(array == null || array.size() == 0) return;
@@ -67,20 +72,34 @@ public class LinearSpacePerfectHashing<AnyType>
       
       if(n == 1)
       {
-          // Completer
+         data[0].setArray(array);
+         return;
+      }
+      else
+      {
+    	  int[] position=new int[n];
+    	  for(int i=0;i<array.size();i++)
+    	  {
+    		position[i]=findPos(array.get(i)); 
+    	  }
+    	  for(int i=0;i<n;i++)
+    	  {
+    		  ArrayList <AnyType> tabValeurs=new ArrayList<AnyType>(n);
+    		  int nValeurs=0;
+    		  for(int j=0;j<n;j++)
+    		  {
+    			  if(position[i]==findPos(array.get(i)))
+    			  {
+    				  tabValeurs.add(array.get(i));
+    				  nValeurs++;
+    			  }
+    		  }
+    		  data[position[i]].setArray(tabValeurs);
+    	  }
     	  
-    	  data[0]= new QuadraticSpacePerfectHashing<AnyType>(array);
-    	  memorySize=1;
-          return;
       }
       
-    /*  // A completer 
-      a=generator.nextInt();
-      b=generator.nextInt();
-      for (int i=0; i<n; i++) {
-    	  if ()
-    	  data[findPos(array.get(i))]*/
-      }
+      // A completer
    }
    
    public int memorySize() 
@@ -94,5 +113,18 @@ public class LinearSpacePerfectHashing<AnyType>
       // completer
       
       return sb.toString();
+   }
+   public boolean foundElement(AnyType[] array, AnyType x )
+   {
+	   boolean resultat=false;
+	   for(int i=0;i< array.length; i++)
+	   {
+		   if( array[i].equals(x))
+		   {
+			   resultat=true;
+		   }
+		 
+	   }
+     return resultat;
    }
 }
