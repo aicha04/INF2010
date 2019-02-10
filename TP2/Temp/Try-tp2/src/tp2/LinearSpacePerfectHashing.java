@@ -61,6 +61,7 @@ public class LinearSpacePerfectHashing<AnyType>
    @SuppressWarnings("unchecked")
    private void allocateMemory(ArrayList<AnyType> array)
    {
+	   generator=new Random();
 	   a=generator.nextInt(p); 
   		b=generator.nextInt(p);
       clear();
@@ -84,15 +85,21 @@ public class LinearSpacePerfectHashing<AnyType>
     	  }
     	  for(int i=0;i<n;i++)
     	  {
-    		  ArrayList <AnyType> tabValeurs=new ArrayList<AnyType>(n);
+    		  AnyType[] valeurs=(AnyType[])new Object[n];
+    		 
     		  int nValeurs=0;
     		  for(int j=0;j<n;j++)
     		  {
-    			  if(position[i]==findPos(array.get(i)))
+    			  if(position[i]==findPos(array.get(j)))
     			  {
-    				  tabValeurs.add(array.get(i));
+    				  valeurs[nValeurs]=array.get(j);
     				  nValeurs++;
     			  }
+    		  }
+    		  ArrayList <AnyType> tabValeurs=new ArrayList<AnyType>(nValeurs);
+    		  for(int k=0;k<nValeurs;k++)
+    		  {
+    			  tabValeurs.add(valeurs[k]);
     		  }
     		  data[position[i]].setArray(tabValeurs);
     	  }
