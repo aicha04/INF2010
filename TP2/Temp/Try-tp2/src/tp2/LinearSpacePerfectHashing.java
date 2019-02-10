@@ -97,14 +97,14 @@ public class LinearSpacePerfectHashing<AnyType>
     		  position[i]=new Position();
     		position[i].value=findPos(array.get(i)); 
     	  }
-    	  for(int i=0;i<n;i++)
+    	  for(int i=0;i<n&& !(position[i].found);i++)
     	  {
     		  AnyType[] valeurs=(AnyType[])new Object[n];
     		 
     		  int nValeurs=0;
     		  for(int j=0;j<n;j++)
     		  {
-    			  if(findPos(array.get(j))==position[i].value )
+    			  if(findPos(array.get(j))==position[i].value  )
     			  {
     				  valeurs[nValeurs]=array.get(j);
     				  position[i].found=true;
