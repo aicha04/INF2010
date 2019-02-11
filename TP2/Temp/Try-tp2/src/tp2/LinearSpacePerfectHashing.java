@@ -130,13 +130,15 @@ public class LinearSpacePerfectHashing<AnyType>
       return memorySize;
    }
    
-   public String toString(){
+    public String toString(){
       StringBuilder sb = new StringBuilder();
       
       // completer
-      
+      for(int i=0; i<n;i++) 
+          if( data[i] != null )  
+        	  sb.append(i+"->"+data[i].toString());
       return sb.toString();
-   }
-  
- 
+            	       
+   
+    }
 }
