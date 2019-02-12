@@ -1,3 +1,11 @@
+/************************************************************
+* TP2: Hachage												*
+* classe HashFunctions pour tester les fonctions de hashage	*
+* Auteures: Aicha miloudi et Gloria Sohou					*
+* matricules: 1872134 1832523								*
+* Date: 11 fevrier 2019										*
+*************************************************************/
+
 package tp2;
 
 import java.util.ArrayList;
@@ -92,22 +100,31 @@ public class HashFunctions
    
    public static ArrayList<Integer> randomIntegers(int length)
    {
+	  
       Random generator = new Random( System.nanoTime() );
+      
       ArrayList<Integer> al = new ArrayList<Integer>(length);
       int nIntegers=0;
+      // thant que la liste n'est pas complète
       while(nIntegers < length)
       {
+    	  
     	  boolean isPresent=false;
+    	  //generer un entier aléatoirements
     	  int integer=generator.nextInt(46337);
+    	  // pour tout les element déja contenue dans la liste
     	  for(int i=0;i<al.size();i++)
     	  {
+    		  //verifier si l'entier généré existe deja
     		  if(al.get(i) !=null && al.get(i).equals(integer))
     		  {
     			  isPresent=true;
     		  }
     	  }
+    	  // si l'entier est unique
     	  if(!isPresent)
     	  {
+    		  //ajouter l'entier à la liste et incrémenter le nombre d'entier total
     		  al.add(integer);
     		  nIntegers++;
     	  }
