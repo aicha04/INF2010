@@ -1,3 +1,4 @@
+package tp3;
 import java.util.List;
 
 public class BinaryNode<T extends Comparable<? super T> > {
@@ -66,15 +67,20 @@ public class BinaryNode<T extends Comparable<? super T> > {
     // de manière que le plus petit item sera le premier inseré
     // O(n)
     public void fillListInOrder(List<BinaryNode<T>> result) {
+    	
        	if (left!=null) {
        		left.fillListInOrder(result);
        	}
-       	else {
-       		result.add(this);
-       		if (right!=null) {
-       			right.fillListInOrder(result);
-       		}
-       	}
+       	
+   		result.add(this);
+   		if (right!=null) {
+   			right.fillListInOrder(result);
+   		}
+    	
+       	
     }
 }
 //aquisition est un arbre binaire, arbre de compagnie enfant n'est pas binaire  
+
+
+

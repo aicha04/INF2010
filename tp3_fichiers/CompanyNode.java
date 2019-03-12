@@ -1,3 +1,4 @@
+package tp3;
 import java.util.List;
 
 public class CompanyNode implements Comparable<CompanyNode> {
