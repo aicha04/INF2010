@@ -12,22 +12,23 @@ public class BinarySearchTree<T extends Comparable<? super T> > {
 
     // TODO: initialisation
     public BinarySearchTree(T item) {
-    	root = new BinaryNode(item);
+    	root = new BinaryNode<T>(item);
     	
     }
 
     // TODO: on insere un nouvel item a partir de la racine
     // O(log(n))
     public void insert(T item) {
+  
     	root.insert(item);
     	
     }
 
-    // TODO: est-ce qu'un item fais partie de l'arbre
+    // TODO: est-ce qu'un item fait partie de l'arbre
     // O(log(n))
     public boolean contains(T item) {
-    	root.contains(item);
-        return false;
+    	return root.contains(item);
+        //return false;
     }
 
     // TODO: trouver la hauteur de l'arbre
@@ -56,6 +57,6 @@ public class BinarySearchTree<T extends Comparable<? super T> > {
     		sb.append(list.get(i).getData()+", ");	
     	}
     	sb.append(list.get(list.size()-1).getData()+ "]");
-        return "1,2,3";
+        return sb.toString();
     }
 }
