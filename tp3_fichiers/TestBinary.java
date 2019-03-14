@@ -110,6 +110,7 @@ public class TestBinary {
 
     private void testHeightZero() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>(10);
+        boolean value=(0 == tree.getHeight());
         TestHelper.printTest(0 == tree.getHeight());
     }
 

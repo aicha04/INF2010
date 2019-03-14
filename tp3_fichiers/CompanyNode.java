@@ -9,19 +9,22 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // TODO: initialisation
     // O(1)
     public CompanyNode(Integer data) {
-
+    		money=data;
+    		worstChild=null;
+    		childs=null;
     }
 
     // TODO: la compagnie courante achete une autre compagnie
     // O(log(n))
     public void buy(CompanyNode item) {
-
+    	childs.insert(item); //=>Log(n)	
     }
 
     // TODO: on retourne le montant en banque de la compagnie
     // O(1)
     public Integer getMoney() {
-        return Integer.MIN_VALUE;
+        //return Integer.MIN_VALUE;??
+    	return money;
     }
 
     // TODO: on rempli le builder de la compagnie et de ses enfants avec le format

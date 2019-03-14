@@ -27,6 +27,7 @@ public class BinarySearchTree<T extends Comparable<? super T> > {
     // TODO: est-ce qu'un item fait partie de l'arbre
     // O(log(n))
     public boolean contains(T item) {
+    	
     	return root.contains(item);
         //return false;
     }

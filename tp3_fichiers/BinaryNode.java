@@ -45,51 +45,59 @@ public class BinaryNode<T extends Comparable<? super T> > {
 
     }
 
-    // TODO: est-ce que l'item fais partie du noeuds courant
+    // TODO: est-ce que l'item fait partie du noeuds courant
     // O(log(n))
     public boolean contains(T item) {
-		if(data.compareTo(item) >0)
+		if(data.compareTo(item) >0&&left!= null &&left.contains(item))
 	    {
-			if( left!= null &&left.contains(item))
-			{
-				return true ;
-			}
+			return true ;
+	
 	    }
 		else if(right !=null&& data.compareTo(item) <0 &&right.contains(item))
 	    {
 			return true ;
 		}
-		else
+		else if (data.compareTo(item)==0)
 		{
 			return true;
 		}
-    return false;
+		else
+		{
+			  return false;
+		}
+  
 }
    
     // TODO: on retourne la maximale de l'arbre
     // O(n)
     public int getHeight() {
-    	int heightLeft =0;
-		int heightRigth=0;
-    	if (this !=null) 
+    	
+		if(data==null )
+		{
+			return -1;
+		}
+		else 
     	{
-    		if (this.left !=null) {
-	    		 heightLeft =1 +left.getHeight();
+			int heightLeft=-1;
+			int heightRigth=-1;
+			if (this.left !=null) {
+	    		 heightLeft =left.getHeight();
     		}
     		if (this.right !=null) {
-	    		 heightRigth=1+right.getHeight(); 
+	    		 heightRigth=right.getHeight(); 
     		}
 
-    		if(heightRigth> heightLeft)
+    		if(heightRigth>= heightLeft)
     		{
-    			return heightRigth;
+    			return 1+heightRigth;
     		}
     		else
     		{
-    			return heightLeft;
+    			return 1+heightLeft;
     		}
+    	
 	    }
-   return -1; 
+
     }
 
     // TODO: l'ordre d'insertion dans la liste est l'ordre logique
