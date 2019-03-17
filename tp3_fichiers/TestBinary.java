@@ -125,6 +125,7 @@ public class TestBinary {
         tree.insert(14);
         tree.insert(15);
         tree.insert(15);
+        boolean val=(tree.getHeight()==5);
         TestHelper.printTest(5 == tree.getHeight());
     }
 
@@ -141,6 +142,7 @@ public class TestBinary {
         long startTime = System.nanoTime();
         int max = 2000;
         boolean isGood = true;
+        
         for (int j = 0; j < max; ++j) {
             BinarySearchTree<Integer> tree = new BinarySearchTree<>(max / 2);
             List<Integer> list = new ArrayList<>();

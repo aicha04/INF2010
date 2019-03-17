@@ -17,7 +17,8 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // TODO: la compagnie courante achete une autre compagnie
     // O(log(n))
     public void buy(CompanyNode item) {
-    	childs.insert(item); //=>Log(n)	
+    	childs.insert(item); //=>Log(n)
+    	money+=item.money;
     }
 
     // TODO: on retourne le montant en banque de la compagnie
@@ -42,6 +43,18 @@ public class CompanyNode implements Comparable<CompanyNode> {
     @Override
     public int compareTo(CompanyNode item) {
 
-        return 0;
+        if(money.compareTo(item.money) <0)
+        {
+        	return -1;
+        }
+        else if(money.compareTo(item.money) >0)
+        {
+        	return 1;
+        }
+        else
+        {
+        	return 0;
+        }
+      
     }
 }

@@ -34,13 +34,17 @@ public class BinaryNode<T extends Comparable<? super T> > {
     		}
     		
     	}
-    	else {
+    	else if (data.compareTo(item)<0){
     		if (right == null) {
     			right = new BinaryNode<T>(item);
     		}
     		else {
     			right.insert(item);
     		}
+    	}
+    	else
+    	{
+    		return; //doublons
     	}
 
     }
