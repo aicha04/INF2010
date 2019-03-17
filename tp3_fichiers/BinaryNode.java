@@ -25,7 +25,7 @@ public class BinaryNode<T extends Comparable<? super T> > {
     // O(log(n))
     public void insert(T item) {
     	
-    	if (data.compareTo(item)>0) {
+    	if (data.compareTo(item)>0 || data.compareTo(item)==0) {
     		if (left == null) {
     			left = new BinaryNode<T>(item);
     		}
@@ -34,7 +34,7 @@ public class BinaryNode<T extends Comparable<? super T> > {
     		}
     		
     	}
-    	else if (data.compareTo(item)<0){
+    	else {
     		if (right == null) {
     			right = new BinaryNode<T>(item);
     		}
@@ -42,10 +42,7 @@ public class BinaryNode<T extends Comparable<? super T> > {
     			right.insert(item);
     		}
     	}
-    	else
-    	{
-    		return; //doublons
-    	}
+    	
 
     }
 
