@@ -6,10 +6,10 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Debut des tests du TP3");
-        TestBinary testBinary = new TestBinary();
-        testBinary.test();
+//        TestBinary testBinary = new TestBinary();
+//        testBinary.test();
 
-       /* TestCompany testCompany = new TestCompany();
-        testCompany.test();*/
+        TestCompany testCompany = new TestCompany();
+        testCompany.test();
     }
 }

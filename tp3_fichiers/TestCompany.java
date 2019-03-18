@@ -29,6 +29,7 @@ public class TestCompany {
         CompanyNode _60 = new CompanyNode(60);
 
         CompanyNode _40 = new CompanyNode(40);
+        
         _40.buy(new CompanyNode(-10));
         _40.buy(new CompanyNode(10));
 
@@ -70,6 +71,7 @@ public class TestCompany {
 
     private void testMoney() {
         CompanyTree tree = initTest();
+        boolean value=tree.getMoney() == 402;
         TestHelper.printTest(tree.getMoney() == 402);
     }
 

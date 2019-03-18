@@ -11,14 +11,35 @@ public class CompanyNode implements Comparable<CompanyNode> {
     public CompanyNode(Integer data) {
     		money=data;
     		worstChild=null;
-    		childs=null;
+    		childs= null;
     }
 
     // TODO: la compagnie courante achete une autre compagnie
     // O(log(n))
     public void buy(CompanyNode item) {
-    	childs.insert(item); //=>Log(n)
+    	
+    	if(childs==null)
+		{
+			childs=new BinarySearchTree<CompanyNode>(item);
+			worstChild=item;
+		}
+    	else
+    	{
+	    	childs.insert(item); //=>Log(n)
+    	}
     	money+=item.money;
+    	if(item.worstChild !=null)
+    	{
+    		Integer value= Math.min(item.worstChild.getMoney(), item.getMoney());
+    		if(worstChild.getMoney()>value)
+	    	{
+	    		worstChild=item;
+	    	}
+    	
+    	}
+    	
+    	
+    	
     }
 
     // TODO: on retourne le montant en banque de la compagnie
@@ -36,25 +57,27 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // les enfants sont afficher du plus grand au plus petit (voir TestCompany.testPrint)
     // O(n)
     public void fillStringBuilderInOrder(StringBuilder builder, String prefix) {
-
+    	prefix="<";
+    	builder=new StringBuilder();
+    	builder.append(money);
+    	builder.append(prefix);
+    	builder.toString();
     }
 
     // TODO: on override le comparateur pour defenir l'ordre
     @Override
-    public int compareTo(CompanyNode item) {
-
-        if(money.compareTo(item.money) <0)
+    public int compareTo(CompanyNode item) 
+    {
+    	int value=money.compareTo(item.money);
+        if( value<0)
         {
         	return -1;
         }
-        else if(money.compareTo(item.money) >0)
+        else if(value >0)
         {
         	return 1;
         }
-        else
-        {
-        	return 0;
-        }
-      
+        return 0;
     }
+     
 }
