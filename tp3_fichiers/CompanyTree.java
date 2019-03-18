@@ -27,6 +27,7 @@ public class CompanyTree {
     // Ceci est le pire de tous les enfants et les sous-enfants
     // O(1)
     public Integer getWorstChildMoney() {
+    	
         return root.worstChild.getMoney();
     }
 
@@ -34,7 +35,11 @@ public class CompanyTree {
     // de la compagnie mère et de ses enfants
     // O(1)
     public String getTreeInOrder() {
-
-        return "";
+    	String prefix=" > ";
+    	StringBuilder builder = new StringBuilder();
+    	builder.append(root.getMoney().toString()+"\n");
+    	root.fillStringBuilderInOrder(builder, prefix);
+    	
+        return builder.toString();
     }
 }

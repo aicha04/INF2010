@@ -21,27 +21,46 @@ public class CompanyNode implements Comparable<CompanyNode> {
     	if(childs==null)
 		{
 			childs=new BinarySearchTree<CompanyNode>(item);
-			worstChild=item;
+			if (item.worstChild!=null && item.getMoney().compareTo(item.worstChild.getMoney())==1) {
+				
+				worstChild=item.worstChild;
+			}
+			else {
+				worstChild=item;
+			}
 		}
     	else
     	{
 	    	childs.insert(item); //=>Log(n)
+	    	if(item.worstChild !=null && item.worstChild!=null)
+	    	{
+	    		
+	    		if (item.getMoney().compareTo(item.worstChild.getMoney())==-1) {
+	    			if(worstChild.getMoney()>item.getMoney())
+	    	    	{
+	    	    		worstChild=item;
+	    	    	}
+	    		}
+	    		else {
+	    			if(worstChild.getMoney()>item.worstChild.getMoney())
+	    	    	{
+	    	    		worstChild=item.worstChild;
+	    	    	}
+	    		}
+	    		
+	    		
+	    	}
+	    	else if (item.worstChild !=null && item.worstChild==null) {
+	    		if(worstChild.getMoney()>item.getMoney())
+		    	{
+		    		worstChild=item;
+		    	}
+	    	}
     	}
     	money+=item.money;
-    	if(item.worstChild !=null)
-    	{
-    		Integer value= Math.min(item.worstChild.getMoney(), item.getMoney());
-    		if(worstChild.getMoney()>value)
-	    	{
-	    		worstChild=item;
-	    	}
-    	
-    	}
     	
     	
-    	
-    }
-
+	}
     // TODO: on retourne le montant en banque de la compagnie
     // O(1)
     public Integer getMoney() {
@@ -57,11 +76,20 @@ public class CompanyNode implements Comparable<CompanyNode> {
     // les enfants sont afficher du plus grand au plus petit (voir TestCompany.testPrint)
     // O(n)
     public void fillStringBuilderInOrder(StringBuilder builder, String prefix) {
-    	prefix="<";
-    	builder=new StringBuilder();
-    	builder.append(money);
-    	builder.append(prefix);
-    	builder.toString();
+    	if(childs!=null) {
+    		
+    		for(int i=childs.getItemsInOrder().size()-1;i>=0;i--) {
+    			builder.append(prefix);
+    			
+    			builder.append(childs.getItemsInOrder().get(i).getData().getMoney().toString()+"\n");
+    			
+    			childs.getItemsInOrder().get(i).getData().fillStringBuilderInOrder(builder, prefix+" > ");
+    			
+    		}
+    		
+    		
+    	}
+    	
     }
 
     // TODO: on override le comparateur pour defenir l'ordre
