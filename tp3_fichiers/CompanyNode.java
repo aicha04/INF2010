@@ -32,7 +32,7 @@ public class CompanyNode implements Comparable<CompanyNode> {
     	else
     	{
 	    	childs.insert(item); //=>Log(n)
-	    	if(item.worstChild !=null && item.worstChild!=null)
+	    	if(worstChild !=null && item.worstChild!=null)
 	    	{
 	    		
 	    		if (item.getMoney().compareTo(item.worstChild.getMoney())==-1) {
@@ -50,13 +50,14 @@ public class CompanyNode implements Comparable<CompanyNode> {
 	    		
 	    		
 	    	}
-	    	else if (item.worstChild !=null && item.worstChild==null) {
+	    	else if (worstChild !=null && item.worstChild==null) {
 	    		if(worstChild.getMoney()>item.getMoney())
 		    	{
 		    		worstChild=item;
 		    	}
 	    	}
     	}
+    	
     	money+=item.money;
     	
     	
