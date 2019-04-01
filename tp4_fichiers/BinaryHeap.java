@@ -337,37 +337,30 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     }
     
     private class HeapIterator implements Iterator {
-    	int current = 0;
-            
-     public boolean hasNext( )
-      {
-          return current != size( );
-      }
-        
-    public AnyType next( )
-    {
-        if( hasNext( ) )
-            return array[ ++current ];
-        else
-            throw new NoSuchElementException( );
-    }
-    
-    public void remove( )
-    {
-        throw new UnsupportedOperationException( );
-    }
-
-	public Object next() throws NoSuchElementException, 
-				    ConcurrentModificationException, 
-				    UnsupportedOperationException {
-		 if( hasNext( ) )
-             return array[ ++current ];
-         else
-             throw new NoSuchElementException( );
-	}
 	
-	public void remove() {
-	    throw new UnsupportedOperationException();
-	}
-    }
+    	int current = 0; //position de l'element courant dans le tableau
+        int modCount=modifications; //nbre de modifications en debut d'iterations
+        public boolean hasNext( )
+         {
+             return current != size();
+         }
+
+   	public Object next() throws NoSuchElementException, 
+   				    ConcurrentModificationException, 
+   				    UnsupportedOperationException {
+   		 if( hasNext() && modCount==modifications ) {
+                return array[ ++current ];
+                }
+          else if( hasNext()&&modCount!=modifications ) {
+                throw new ConcurrentModificationException();
+          }
+          else {
+        	  throw new NoSuchElementException();
+          }
+       }
+   	
+   	public void remove() {
+   	    throw new UnsupportedOperationException();
+   	}
+   }
 }
