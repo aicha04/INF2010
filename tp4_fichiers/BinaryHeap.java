@@ -48,18 +48,11 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 	
 	if( currentSize + 1 == array.length )
 	    doubleArray();
-	/*for(AnyType elt: array) //doublons
-	{
-		if(elt !=null &&elt.compareTo(x)==0 )
-		{
-			return false;
-		}
-	}*/
 	// COMPLETEZ
 	if (min) {
 		int i = ++currentSize;
 		for( ; i > 1 && x.compareTo( array[ i / 2 ] ) < 0; i /= 2) {
-			array[ i ] = array[ i / 2 ]; array[ i ] = x;
+			array[ i ] = array[ i / 2 ];
 	
 		}
 		array[i]=x;
@@ -67,7 +60,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 	else {
 		int i = ++currentSize;
 		for( ; i > 1 && x.compareTo( array[ i / 2 ] ) > 0; i /= 2) {
-			array[ i ] = array[ i / 2 ]; array[ i ] = x;
+			array[ i ] = array[ i / 2 ]; 
 	
 		}
 		array[i]=x;
@@ -194,36 +187,36 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 				    void percolateDownMinHeap( AnyType[] array, int hole, int size, boolean heapIndexing )
     {
 	//COMPLETEZ
-    	int child;
+    	int child=0;
+    	AnyType temp=array[hole];
     	if (heapIndexing) {
     		for (;hole*2<=size;hole=child) {
     			child=hole*2;
         		if (child!=size &&array[child+1].compareTo(array[child])<0) {
         			child++;
         		}
-        		if (array[hole].compareTo(array[child])>0) {
-        			AnyType temp=array[hole];
+        		if (array[child].compareTo(temp)<0) {
         			array[hole]=array[child];
-        			array[child]=temp;
         		}
-        		else 
-        			break;
+        		else {
+        			break;}
+        	array[child]=temp;
         	}
     	}
     	else {
-    		for (;hole*2<=size;hole=child) {
-    			child=hole*2+1;
-        		if (child!=size &&array[child+1].compareTo(array[child])<0) {
+    		for (;hole*2<=size-1;hole=child) {
+    			child=hole*2;
+        		if (child!=size-1&&array[child+1].compareTo(array[child])<0) {
         			child++;
         		}
-        		if (array[hole].compareTo(array[child])>0) {
-        			AnyType temp=array[hole];
+        		if (array[child].compareTo(temp)<0) {
         			array[hole]=array[child];
-        			array[child]=temp;
+        			
         		}
         		else 
         			break;
         	}
+    		array[child]=temp;
     	}
     	
     }
@@ -246,50 +239,57 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     private static <AnyType extends Comparable<? super AnyType>> 
 				    void percolateDownMaxHeap( AnyType[] array, int hole, int size, boolean heapIndexing )
     {
-	//COMPLETEZ
-    	int child;
+    	//COMPLETEZ
+    	int child=0;
+    	AnyType temp=array[hole];
     	if (heapIndexing) {
-    		for (;hole*2<=size;hole=child) {
+    		for (;hole*2<size;hole=child) {
     			child=hole*2;
         		if (child!=size &&array[child+1].compareTo(array[child])>0) {
         			child++;
         		}
-        		if (array[hole].compareTo(array[child])<0) {
-        			AnyType temp=array[hole];
+        		if (array[child].compareTo(temp)>0) {
         			array[hole]=array[child];
-        			array[child]=temp;
         		}
-        		else 
-        			break;
+        		else {
+        			break;}
+        	array[child]=temp;
         	}
     	}
     	else {
-    		for (;hole*2<=size;hole=child) {
-    			child=hole*2+1;
-        		if (child!=size &&array[child+1].compareTo(array[child])>0) {
+    		for (;hole*2<size;hole=child) {
+    			child=hole*2;
+        		if (child!=size&&array[child+1].compareTo(array[child])>0) {
         			child++;
         		}
-        		if (array[hole].compareTo(array[child])<0) {
-        			AnyType temp=array[hole];
+        		if (array[child].compareTo(temp)>0) {
         			array[hole]=array[child];
-        			array[child]=temp;
+        			
         		}
         		else 
         			break;
         	}
+    		array[child]=temp;
     	}
+    	
     }
     
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSort( AnyType[] a )
     {
-	//COMPLETEZ
+    	/* buildHeap */
+    	for( int i = a.length / 2; i >= 0; i-- )  
+    		percolateDownMinHeap( a, i, a.length,false);
+     
     }
     
     public static <AnyType extends Comparable<? super AnyType>>
 				   void heapSortReverse( AnyType[] a )
     {
 	//COMPLETEZ
+    	/* buildHeap */
+    	for( int i = a.length / 2; i >= 0; i-- )  
+    		percolateDownMaxHeap( a, i, a.length,false);
     }
     
     public String nonRecursivePrintFancyTree()
@@ -338,7 +338,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     
     private class HeapIterator implements Iterator {
 	
-    	int current = 0; //position de l'element courant dans le tableau
+    	int current = 1; //position de l'element courant dans le tableau
         int modCount=modifications; //nbre de modifications en debut d'iterations
         public boolean hasNext( )
          {
