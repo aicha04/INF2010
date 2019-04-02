@@ -64,6 +64,12 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 	
 		}
 		array[i]=x;
+		if (min) {
+			buildMinHeap();
+		}
+		else {
+			buildMaxHeap();
+		}
 	}
 		
 	modifications++;
@@ -81,8 +87,9 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     
     public AnyType poll()
     {
+    	
     	AnyType minMaxItem =  array[ 1 ];
-	    array[ 1 ] = array[ currentSize-- ];
+	    swapReferences(1,currentSize-- );
 		try {
 	    	if(min)
 	    	{
@@ -94,7 +101,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 	    	}
 	    	modifications++;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}		
 		
@@ -200,8 +207,8 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
         		}
         		else {
         			break;}
-        	array[child]=temp;
-        	}
+        	
+        	}array[hole]=temp;
     	}
     	else {
     		for (;hole*2<=size-1;hole=child) {
@@ -216,7 +223,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
         		else 
         			break;
         	}
-    		array[child]=temp;
+    		array[hole]=temp;
     	}
     	
     }
@@ -253,13 +260,13 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
         		}
         		else {
         			break;}
-        	array[child]=temp;
-        	}
+        	
+        	}array[hole]=temp;
     	}
     	else {
-    		for (;hole*2<size;hole=child) {
+    		for (;hole*2<size-1;hole=child) {
     			child=hole*2;
-        		if (child!=size&&array[child+1].compareTo(array[child])>0) {
+        		if (child!=size-1&&array[child+1].compareTo(array[child])>0) {
         			child++;
         		}
         		if (array[child].compareTo(temp)>0) {
@@ -269,7 +276,7 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
         		else 
         			break;
         	}
-    		array[child]=temp;
+    		array[hole]=temp;
     	}
     	
     }
@@ -278,9 +285,14 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
 				   void heapSort( AnyType[] a )
     {
     	/* buildHeap */
-    	for( int i = a.length / 2; i >= 0; i-- )  
-    		percolateDownMinHeap( a, i, a.length,false);
-     
+    	for( int i = (a.length / 2)-1; i >= 0; i-- )  
+    		percolateDownMaxHeap( a, i, a.length,false);
+    	
+    	for( int i = a.length - 1; i > 0; i-- )
+        {
+            swapReferences( a, 0, i );            /* deleteMax */
+            percolateDownMaxHeap( a, 0, i ,false);
+        }
     }
     
     public static <AnyType extends Comparable<? super AnyType>>
@@ -288,8 +300,13 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     {
 	//COMPLETEZ
     	/* buildHeap */
-    	for( int i = a.length / 2; i >= 0; i-- )  
-    		percolateDownMaxHeap( a, i, a.length,false);
+    	for( int i = (a.length / 2)-1; i >= 0; i-- )  
+    		percolateDownMinHeap( a, i, a.length,false);
+    	for( int i = a.length - 1; i > 0; i-- )
+        {
+            swapReferences( a, 0, i );            /* deleteMax */
+            percolateDownMinHeap( a, 0, i ,false);
+        }
     }
     
     public String nonRecursivePrintFancyTree()
@@ -338,13 +355,14 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     
     private class HeapIterator implements Iterator {
 	
-    	int current = 1; //position de l'element courant dans le tableau
+    	int current = 0; //position de l'element courant dans le tableau
         int modCount=modifications; //nbre de modifications en debut d'iterations
         public boolean hasNext( )
          {
              return current != size();
          }
 
+        
    	public Object next() throws NoSuchElementException, 
    				    ConcurrentModificationException, 
    				    UnsupportedOperationException {
