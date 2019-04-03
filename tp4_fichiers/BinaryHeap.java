@@ -312,9 +312,64 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
     public String nonRecursivePrintFancyTree()
     {
 	String outputString = "";
+	String prfix="|__";
 	
-	//COMPLETEZ
-
+	//COMPLETEZ 
+	
+	
+	
+	
+	outputString+="|__";
+	
+	outputString+=array[1]+"\n"+"   ";
+	
+	
+	int compteur=0;
+	
+	int initial=2;
+	int number=0;
+	while(initial<=currentSize) {
+		int i=initial;
+		
+		for (;i<=currentSize;i=2*i) {
+			
+			outputString+="|__";
+			outputString+=array[i]+"\n"+"   ";
+			for(int j=0; j<=compteur; j++) {
+				if (i*2>=currentSize && j==compteur) {
+					outputString+="|__";
+					
+				}
+				else {
+				outputString+="|  ";
+				}
+			}
+			
+			
+			
+			if (i*2>=currentSize) {
+				if (i+1>currentSize) {
+					outputString+="null";
+				}
+				else
+					outputString+=array[i+1]+"\n"+"   ";
+					
+					
+				}
+			compteur++;
+			}
+			
+			
+		compteur--;
+		number++;
+		
+		
+		initial=i;
+	}
+		
+	
+	
+	
 	return outputString;
     }
     
