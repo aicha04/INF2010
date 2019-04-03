@@ -9,12 +9,7 @@ public class Main
      */
    public static void main(String[] args) 
    {
-	   test();
-	   /**
-	    *Tests poll() and iterator
-	    *@param: aucun
-	    **/
-	 /* 
+	
       // creer un monceau avec 22 elements et un tableau equivalent
      int numItems = 22;
       BinaryHeap<Integer> heap = new BinaryHeap<Integer>(true);
@@ -72,12 +67,20 @@ public class Main
       BinaryHeap.heapSortReverse( items );
       System.out.println("Tableau inversement ordonne:");
       System.out.println( printArray( items ) );
-   }*/
-
-      /*
-       * Ajouter appels pour repondre a la question
-       */
+      
+      /**
+	    *Tests poll() and iterator
+	    *@param: aucun
+	    **/
+	   testProrityQueueJava();
+	   System.out.println("\n" + "Binary MinHeap");
+	   testBinaryHeap(true, "min ");
+	   System.out.println("\n"+"Binary Max Heap");
+	   testBinaryHeap(false,"max ");
+	   
    }
+
+
    private static <AnyType> 
    String printArray(AnyType[] a)
    {
@@ -92,16 +95,27 @@ public class Main
       return outputString.substring(0,outputString.length()-2);
       
    }
-   public  static void test()
+   
+   /***
+    ** Tester les methodes offer , poll et iterator() 
+    *sur la classe Priority Queue de Java
+    *On fera les même operations dans le testBinaryHeap pour
+    *determiner la concordance
+    */
+   public  static void testProrityQueueJava()
    {
 	   // nouveau priority queue 
        PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>(); 
-       pQueue.add(10); 
-       pQueue.add(5); 
-       pQueue.add(1); 
-       pQueue.add(6); 
+       pQueue.offer(10); 
+       pQueue.offer(5); 
+       pQueue.offer(1); 
+       pQueue.offer(6); 
+       pQueue.offer(8); 
+       pQueue.offer(9); 
+       pQueue.offer(11); 
 
-       System.out.println("Test avec la classe de java:");
+
+       System.out.println("\n" +"Test avec la classe de java:");
        System.out.println("Test d'insertion(offer() et d'iteration(iterator()");
        // Printing all elements 
        System.out.println("Les elements sont:"); 
@@ -122,18 +136,16 @@ public class Main
     	   System.out.println("Element"+j+": "+itr1.next());
            j++;
            } 
-       Iterator<Integer> itr2 = pQueue.iterator();
-       while (itr2.hasNext()) {
-    	  System.out.println(itr2.next());
-    	}
        try {
+    	   
 	       System.out.println("Test de l'iterateur:");
+	       System.out.println("Les elements sont:");
 	       int pos=0;
 	       Iterator<Integer> itr3 = pQueue.iterator(); 
 	       while (itr3.hasNext()) { 
 	        	   System.out.println("Element"+pos+": "+itr3.next());
 	               pos++;
-	           pQueue.add(3);
+	           pQueue.add(3); //modification en cours d'iteration
 	           System.out.println("Après une modification en cours d'iteration:");
 	       }
        }
@@ -141,14 +153,20 @@ public class Main
        {
     	   System.out.println("Impossible d'itérer puisqu'il y a une modification en cours d'itération");
        }
-       
+   }   
        /**
         * Test de notre classe BinaryHeap
+        * On insere des elements un par un. On supprime le root(Pooll())
+        * On utilise l'iterator() une première fois pour afficher tous les elements
+        * On reutilise un autre iterateur pour afficher les elements
+        * Cette fois on ecupère l'exception générée puis on affiche un message d'erreur
+        * Ceci evite de laisser propager l'exception qui pourrait  arreter l'exécution 
+        * du code
         * */
-    public static void  testHeap(boolean min)
-       {
-       System.out.println("\n");
-       System.out.println("Test avec notre classe MinBinaryHeap:(offer() et iterator()");
+    public static void  testBinaryHeap(boolean min, String buffer)
+ {
+  
+       System.out.println("Test avec notre classe BinaryHeap:(offer() et iterator()");
        BinaryHeap<Integer> heap1 = new BinaryHeap<Integer>(min);
        heap1.offer(10); 
        heap1.offer(5); 
@@ -157,7 +175,6 @@ public class Main
        heap1.offer(8); 
        heap1.offer(9); 
        heap1.offer(11); 
-       heap1.offer(5);
        int k=0;
        System.out.println("Les elements sont:");
        Iterator<Integer> it=heap1.iterator(); 
@@ -166,8 +183,8 @@ public class Main
            k++;
         }
        //supprimer le plus petit element
-       System.out.println("Test de suppression du plus petit element (poll())");
-       System.out.println("L'element min est:" +heap1.poll());
+       System.out.println("Test de suppression du plus petit/grand element (poll())");
+       System.out.println("L'element "+ buffer+ "est:" +heap1.poll());
        System.out.println("Les elements sont désormais  sont:"); 
        Iterator<Integer> it1=heap1.iterator(); 
        int l=0;
@@ -178,12 +195,13 @@ public class Main
        
        try {
 	       System.out.println("Test de l'iterateur:");
+	       System.out.println("Les elements sont:");
 	       int pos=0;
 	       Iterator<Integer> it2 = heap1.iterator(); 
 	       while (it2.hasNext()) { 
 	        	   System.out.println("Element"+pos+": "+it2.next());
 	               pos++;
-	           heap1.offer(3);
+	           heap1.offer(3); //modification en cours d'iteration !
 	           System.out.println("Après une modification en cours d'iteration:");
 	       }
        }
@@ -191,8 +209,8 @@ public class Main
        {
     	   System.out.println("Impossible d'itérer puisqu'il y a une modification en cours d'itération");
        }
-       }
+     }
    
    }
    
-}
+
