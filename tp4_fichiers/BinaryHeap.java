@@ -307,70 +307,54 @@ public class BinaryHeap<AnyType extends Comparable<? super AnyType>> extends Abs
             swapReferences( a, 0, i );            /* deleteMax */
             percolateDownMinHeap( a, 0, i ,false);
         }
-    }
-    
-    public String nonRecursivePrintFancyTree()
-    {
-	String outputString = "";
-	String prfix="|__";
-	
-	//COMPLETEZ 
-	
-	
-	
-	
-	outputString+="|__";
-	
-	outputString+=array[1]+"\n"+"   ";
-	
-	
-	int compteur=0;
-	
-	int initial=2;
-	int number=0;
-	while(initial<=currentSize) {
-		int i=initial;
+	    }
+	    
+	    public String nonRecursivePrintFancyTree()
+	    {
+		String outputString = "";
+		String prfix="|__";
 		
-		for (;i<=currentSize;i=2*i) {
-			
-			outputString+="|__";
-			outputString+=array[i]+"\n"+"   ";
-			for(int j=0; j<=compteur; j++) {
-				if (i*2>=currentSize && j==compteur) {
-					outputString+="|__";
-					
-				}
-				else {
-				outputString+="|  ";
-				}
+		//COMPLETEZ 
+		int hole = 1; 
+		Stack<Integer> Temp = new Stack<Integer>(); 
+		  
+		Temp.push(hole);
+		  
+		while(!Temp.empty()){ 
+		 
+			hole = Temp.pop();
+			Vector<Boolean> left = new Vector<Boolean>();
+		  
+			if(leftChild(hole, true) <= currentSize){
+			  Temp.push(leftChild(hole, true) + 1); 
+			  Temp.push(leftChild(hole, true));
+			  
 			}
 			
-			
-			
-			if (i*2>=currentSize) {
-				if (i+1>currentSize) {
-					outputString+="null";
-				}
+			for (int i = hole; i > 0; i /= 2){
+				
+				if(i % 2 == 0)
+					left.add(true);
 				else
-					outputString+=array[i+1]+"\n"+"   ";
-					
-					
-				}
-			compteur++;
+					left.add(false);
 			}
-			
-			
-		compteur--;
-		number++;
+	     
+			for (int j = left.size() - 1; j > 0; j--){
+				if(left.get(j))
+					outputString += "|  ";
+				else
+					outputString += "   ";
+			}
+				  
+			if (hole <= currentSize)
+				outputString +=  "|__" + array[hole] + "\n";
+		  
+			else 
+				outputString += "|__" + "null" + "\n";
+	   }
 		
 		
-		initial=i;
-	}
-		
-	
-	
-	
-	return outputString;
+		return outputString;
     }
     
     public String printFancyTree()
