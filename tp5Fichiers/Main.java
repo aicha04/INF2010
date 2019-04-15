@@ -29,7 +29,7 @@ public class Main {
 		Edge edge1=new Edge (A,B,2);
 		Edge edge2=new Edge (A,C,1);
 		
-		Edge edge3=new Edge (B,E,2);
+		Edge edge3=new Edge (B,E,3);
 		Edge edge4=new Edge (B,C,2);
 		Edge edge5=new Edge (B,D,1);
 		Edge edge6=new Edge (C,D,4);
@@ -64,12 +64,12 @@ public class Main {
 		
 		Dijkstra d = new Dijkstra(g);
 		
-		d.findPath(/* Spécifiez les paramètres */);
+		d.findPath(A,G);
 		
 		d.afficherTable();
 
 		// Partie 3 : Afficher le chemin le plus court
-		System.out.println(d.afficherCourtChemin(/* Spécifiez les paramètres */));
+		System.out.println(d.afficherCourtChemin(A,G));
 	
 	}
 }
